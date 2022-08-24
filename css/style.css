@@ -150,7 +150,7 @@ main {
 
     font-size: 20px;
     color: #000000;
-    
+
     border-radius: 15px;
 }
 
@@ -187,12 +187,19 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0 0;
-    opacity: 0.8;
 
     cursor: pointer;
 }
 
-.cover_image:hover,
-.card_image:hover {
+.cover_image {
+    opacity: 0.8;
+}
+
+.cover_image:hover {
     opacity: 1;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
 }
