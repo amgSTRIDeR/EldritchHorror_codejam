@@ -1,0 +1,198 @@
+@font-face {
+    font-family: "Birmingham";
+    src: url("../assets/fonts/Birmingham/Birmingham.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Birmingham";
+    src: url("../assets/fonts/Birmingham/BirminghamBold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "BirminghamTitling";
+    src: url("../assets/fonts/Birmingham/BirminghamTitlingElongated.ttf");
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: "Birmingham";
+    line-height: 1.5;
+
+    color: #FFFFFF;
+    background-color: #000000;
+    background-image: url("../assets/img/bgimage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+ul[class],
+ol[class] {
+    padding: 0;
+
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ancients {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 610px;
+
+}
+
+.ancient {
+    width: 300px;
+    height: 383px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.ancient:hover {
+    opacity: 1;
+}
+
+.difficulties {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.difficulty {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.difficulty:hover {
+    opacity: 1;
+}
+
+.active {
+    opacity: 1;
+}
+
+.start_button {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.start_button:hover {
+    opacity: 1;
+}
+
+.cardsInDeck {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 300px;
+    justify-content: space-between;
+}
+
+.stage {
+    display: flex;
+}
+
+.blue_cards,
+.green_cards,
+.brown_cards {
+    width: 30px;
+    height: 30px;
+    padding-left: 13px;
+
+    font-size: 20px;
+    color: #000000;
+    
+    border-radius: 15px;
+}
+
+.blue_cards {
+    margin-left: 20px;
+    background-color: rgb(1, 124, 255);
+}
+
+.brown_cards {
+    margin-left: 10px;
+    background-color: rgb(130, 46, 0);
+}
+
+.green_cards {
+    margin-left: 10px;
+    background-color: rgb(21, 255, 0);
+}
+
+
+.cards_show {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    margin: 30px;
+
+}
+
+.cover_image,
+.card_image {
+    width: 280px;
+    height: 400px;
+
+    /* background-image: url('../assets/img/mythicCardBackground.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    opacity: 0.8;
+
+    cursor: pointer;
+}
+
+.cover_image:hover,
+.card_image:hover {
+    opacity: 1;
+}
