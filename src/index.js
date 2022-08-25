@@ -2,7 +2,7 @@ import ancients from '../data/ancients.js';
 import mythicCards from '../data/mythicCards.js';
 import difficulties from '../data/difficulties.js';
 
-const ancientsArray = Array.from(document.querySelectorAll('.ancient'));
+const ancientsElement = document.querySelector('.ancients');
 const difficultiesArray = Array.from(document.querySelectorAll('.difficulty'));
 const startButton = document.querySelector('.start_button')
 const firstStageIndicators = document.querySelector('.first_stage_indicators');
@@ -10,12 +10,24 @@ const secondStageIndicators = document.querySelector('.second_stage_indicators')
 const thirdStageIndicators = document.querySelector('.third_stage_indicators');
 const coverImage = document.querySelector('.cover_image');
 const cardImage = document.querySelector('.card_image');
+const bigCardImage = document.querySelector('.big_card_image');
+const main = document.querySelector('.main');
+
 
 let firstStage = [];
 let secondStage = [];
 let thirdStage = [];
 let activeAncient;
 let activeDifficulty;
+
+
+let ancientsHTML = '';
+ancients.forEach((e) => {
+    ancientsHTML += `<li class="ancient ${e.id}" style="background-image: url(${e.icon})"><p class="ancient_name hide">${e.name}</p></li>`;
+})
+
+ancientsElement.innerHTML = ancientsHTML;
+const ancientsArray = Array.from(document.querySelectorAll('.ancient'));
 
 function removeActiveClass(array) {
     array.forEach((e) => {
@@ -36,9 +48,11 @@ function shuffleArray(array) {
     return shuffledArray;
 }
 
-ancientsArray.forEach((e, i) => {
-    e.style.backgroundImage = `url(${ancients[i].cardFace})`;
-})
+// ancientsArray.forEach((e, i) => {
+//     e.style.backgroundImage = `url(${ancients[i].cardFace})`;
+// })
+
+console.log(ancientsArray);
 
 difficultiesArray.forEach((e, i) => {
     e.textContent = `${difficulties[i].name}`;
@@ -46,10 +60,41 @@ difficultiesArray.forEach((e, i) => {
 
 ancientsArray.forEach((e, i) => {
     e.addEventListener('click', () => {
+        ancientsArray.forEach((e) => {
+            e.querySelector('p').classList.add('hide');
+        });
         removeActiveClass(ancientsArray);
         e.classList.add('active');
+        e.querySelector('p').classList.remove('hide');
         activeAncient = ancients[i].id;
     })
+
+    e.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        bigCardImage.src = ancients.filter(v => v.name === e.textContent)[0].cardFace;
+        bigCardImage.classList.remove('hide');
+        main.classList.add('shadow');
+        
+    }, false);
+})
+
+cardImage.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    console.log(cardImage.style.backgroundImage);
+    let cardImageLink = cardImage.style.backgroundImage.replace('url("', '');
+    cardImageLink = cardImageLink.replace('")', '');
+    console.log(cardImageLink);
+    bigCardImage.src = cardImageLink;
+    bigCardImage.classList.remove('hide');
+        main.classList.add('shadow');
+})
+
+window.addEventListener('click', () => {
+    if (main.classList.contains('shadow')) {
+        bigCardImage.classList.add('hide');
+        main.classList.remove('shadow');
+        bigCardImage.src = "";
+    }
 })
 
 difficultiesArray.forEach((e, i) => {
@@ -332,7 +377,7 @@ startButton.addEventListener('click', () => {
         firstStage = [];
         secondStage = [];
         thirdStage = [];
-        coverImage.style.backgroundImage = "url('./assets/img/mythicCardBackground.png')"
+        coverImage.style.backgroundImage = "url('./assets/img/mythicCardBackground.jpg')"
         cardImage.style.backgroundImage = "url('')"
         coverImage.classList.remove('hide');
         getCards(activeAncient, activeDifficulty);
