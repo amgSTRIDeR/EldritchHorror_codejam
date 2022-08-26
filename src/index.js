@@ -2,6 +2,11 @@ import ancients from '../data/ancients.js';
 import mythicCards from '../data/mythicCards.js';
 import difficulties from '../data/difficulties.js';
 
+console.log('Good day Sir!');
+console.log('1) При выполнении работы добавил древних и карты из дополнений к игре - теперь карт хватает на очень легкую и очень тяжелую сложность, но добор нормальных карт при нехватке в коде реализован.');
+console.log('2) При наведении на изображение древнего показывается подсказка с распределением карт по стадиям, для показа карты древнего необходимо нажать правую кнопку мыши на изображение древнего.');
+console.log('3) Если заинтересовала игра - помимо физической версии игры есть симулятор настольных игр "Tabletop Simulator" для которого можно найти "Древний ужас" со всеми дополнениями.');
+
 const ancientsElement = document.querySelector('.ancients');
 const difficultiesArray = Array.from(document.querySelectorAll('.difficulty'));
 const startButton = document.querySelector('.start_button')
@@ -12,6 +17,12 @@ const coverImage = document.querySelector('.cover_image');
 const cardImage = document.querySelector('.card_image');
 const bigCardImage = document.querySelector('.big_card_image');
 const main = document.querySelector('.main');
+const cardsInDeckElement = document.querySelector('.cardsInDeck');
+const message = document.querySelector('.message');
+const checkList = document.querySelector('.check_list');
+const checkButton = document.querySelector('.check_button');
+const additionalInformmation = document.querySelector('.additional_information');
+let tipInterval;
 
 
 let firstStage = [];
@@ -48,12 +59,6 @@ function shuffleArray(array) {
     return shuffledArray;
 }
 
-// ancientsArray.forEach((e, i) => {
-//     e.style.backgroundImage = `url(${ancients[i].cardFace})`;
-// })
-
-console.log(ancientsArray);
-
 difficultiesArray.forEach((e, i) => {
     e.textContent = `${difficulties[i].name}`;
 })
@@ -74,19 +79,53 @@ ancientsArray.forEach((e, i) => {
         bigCardImage.src = ancients.filter(v => v.name === e.textContent)[0].cardFace;
         bigCardImage.classList.remove('hide');
         main.classList.add('shadow');
-        
+
     }, false);
+
+    e.addEventListener('mouseenter', () => {
+        tipInterval = setTimeout(() => {
+            setDescription(i);
+            additionalInformmation.style.top = `${e.getBoundingClientRect().top + window.pageYOffset + 170}px`;
+            additionalInformmation.style.left = `${e.getBoundingClientRect().left + + window.pageXOffset}px`;
+            additionalInformmation.classList.remove('hide');
+        }, 1000);
+    });
+
+    e.addEventListener('mouseleave', () => {
+        additionalInformmation.classList.add('hide');
+        additionalInformmation.innerHTML = '';
+        clearInterval(tipInterval);
+    });
 })
+
+function setDescription(i) {
+    let colorsArray = ['green', 'brown', 'blue'];
+    let stagesArray = ['first', 'second', 'third'];
+    let descriptionText = `<p class="description_ancientName">${ancients[i].name}</p><p class="description_additionalInformation">${ancients[i].description}</p>`;
+
+    stagesArray.forEach((stage) => {
+        descriptionText += `<div class="description_stage">${stage} stage:`;
+
+        colorsArray.forEach((color) => {
+            let stageText = stage + 'Stage';
+            let colorText = color + 'Cards';
+            descriptionText += `<img class="description_image" src="./assets/img/${ancients[i][stageText][colorText]}_${color}.png" alt="cards">`;
+        })
+
+        descriptionText += '</div>';
+    })
+
+    additionalInformmation.innerHTML = descriptionText;
+
+}
 
 cardImage.addEventListener('contextmenu', (event) => {
     event.preventDefault();
-    console.log(cardImage.style.backgroundImage);
     let cardImageLink = cardImage.style.backgroundImage.replace('url("', '');
     cardImageLink = cardImageLink.replace('")', '');
-    console.log(cardImageLink);
     bigCardImage.src = cardImageLink;
     bigCardImage.classList.remove('hide');
-        main.classList.add('shadow');
+    main.classList.add('shadow');
 })
 
 window.addEventListener('click', () => {
@@ -99,8 +138,13 @@ window.addEventListener('click', () => {
 
 difficultiesArray.forEach((e, i) => {
     e.addEventListener('click', () => {
+        difficultiesArray.forEach((v) => {
+            v.style.color = '#FFFFFF';
+        });
+
         removeActiveClass(difficultiesArray);
         e.classList.add('active');
+        e.style.color = e.dataset.color;
         activeDifficulty = difficulties[i].id
     })
 })
@@ -333,28 +377,35 @@ function getCards(ancient = 'azathoth', difficulty = 'normal') {
         for (let i = 0; i < preThirdStage.length; i++) {
             thirdStage.push(array.splice(getRandomNumber(array.length), 1)[0]);
         }
+
+        fillCheckList();
     }
 
     showCardsInDeck();
 
 }
 
-function showCardsInDeck() {
-    firstStageIndicators.querySelector('.blue_cards').textContent = firstStage.filter(v => v.color === 'blue').length;
-    firstStageIndicators.querySelector('.brown_cards').textContent = firstStage.filter(v => v.color === 'brown').length;
-    firstStageIndicators.querySelector('.green_cards').textContent = firstStage.filter(v => v.color === 'green').length;
-
-    secondStageIndicators.querySelector('.blue_cards').textContent = secondStage.filter(v => v.color === 'blue').length;
-    secondStageIndicators.querySelector('.brown_cards').textContent = secondStage.filter(v => v.color === 'brown').length;
-    secondStageIndicators.querySelector('.green_cards').textContent = secondStage.filter(v => v.color === 'green').length;
-
-    thirdStageIndicators.querySelector('.blue_cards').textContent = thirdStage.filter(v => v.color === 'blue').length;
-    thirdStageIndicators.querySelector('.brown_cards').textContent = thirdStage.filter(v => v.color === 'brown').length;
-    thirdStageIndicators.querySelector('.green_cards').textContent = thirdStage.filter(v => v.color === 'green').length;
-
+function fillCheckList() {
+    firstStage.forEach((e) => {
+        checkList.insertAdjacentHTML('afterbegin', `<p>${e.id}_${e.difficulty}</p>`)
+    });
+    secondStage.forEach((e) => {
+        checkList.insertAdjacentHTML('afterbegin', `<p>${e.id}_${e.difficulty}</p>`)
+    });
+    thirdStage.forEach((e) => {
+        checkList.insertAdjacentHTML('afterbegin', `<p>${e.id}_${e.difficulty}</p>`)
+    });
 }
 
+function showCardsInDeck() {
+    let colorsArray = ['green', 'brown', 'blue'];
+    colorsArray.forEach((e) => {
+        firstStageIndicators.querySelector(`.${e}_cards`).style.backgroundImage = `url(./assets/img/${firstStage.filter(v => v.color === e).length}_${e}.png)`
+        secondStageIndicators.querySelector(`.${e}_cards`).style.backgroundImage = `url(./assets/img/${secondStage.filter(v => v.color === e).length}_${e}.png)`
+        thirdStageIndicators.querySelector(`.${e}_cards`).style.backgroundImage = `url(./assets/img/${thirdStage.filter(v => v.color === e).length}_${e}.png)`
+    })
 
+}
 
 coverImage.addEventListener('click', () => {
     if (firstStage.length) {
@@ -372,15 +423,63 @@ coverImage.addEventListener('click', () => {
     showCardsInDeck();
 })
 
+function chooseTipAnimation(array, blinksNumber) {
+    let count = 0;
+
+    let intervalId = setInterval(() => {
+        setTimeout(() => {
+            array.forEach((e) => {
+                e.classList.add('active');
+            })
+            message.classList.remove('hide');
+        }, 100);
+
+        setTimeout(() => {
+            array.forEach((e) => {
+                e.classList.remove('active');
+            })
+            message.classList.add('hide');
+        }, 500);
+
+        count += 1;
+
+        if (count >= blinksNumber) {
+            clearInterval(intervalId);
+        }
+
+    }, 500)
+
+}
+
 startButton.addEventListener('click', () => {
+    if (!activeAncient) {
+        message.textContent = 'Выберите древнего';
+        chooseTipAnimation(ancientsArray, 3);
+    } else if (!activeDifficulty) {
+        message.textContent = 'Выберите сложность';
+        chooseTipAnimation(difficultiesArray, 3);
+    }
+
     if (activeAncient && activeDifficulty) {
         firstStage = [];
         secondStage = [];
         thirdStage = [];
+        checkList.innerHTML = '';
         coverImage.style.backgroundImage = "url('./assets/img/mythicCardBackground.jpg')"
         cardImage.style.backgroundImage = "url('')"
         coverImage.classList.remove('hide');
+        cardsInDeckElement.classList.remove('hide');
         getCards(activeAncient, activeDifficulty);
+    }
+})
+
+checkButton.addEventListener('click', () => {
+    if (checkList.classList.contains('hide')) {
+        checkList.classList.remove('hide');
+        checkButton.textContent = 'Скрыть список';
+    } else {
+        checkList.classList.add('hide');
+        checkButton.textContent = 'Для кроссчека';
     }
 })
 

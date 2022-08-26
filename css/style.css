@@ -27,6 +27,13 @@ body {
     font-family: "Birmingham";
     line-height: 1.5;
 
+    color: #FFFFFF;
+    background-color: #000000;
+    background-image: url("../assets/img/bgimage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
 }
@@ -66,6 +73,34 @@ select {
     font: inherit;
 }
 
+.additional_information {
+    position: absolute;
+    z-index: 20;
+
+    padding: 20px;
+
+    background-color: #000000B3;
+    border-radius: 20px;
+    color: white;
+}
+
+.description_ancientName {
+    text-transform: uppercase;
+    font-size: 20px;
+
+    text-shadow: 2px 2px #6c0101, 2px 2px #8e0000;
+    color: #ff2a04;
+}
+
+.description_stage {
+    display: flex;
+}
+
+.description_image {
+    width: 20px;
+    margin-left: 5px;
+}
+
 .big_card_image {
     position: fixed;
     z-index: 2;
@@ -74,7 +109,7 @@ select {
 
     height: 80vh;
 
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .main {
@@ -82,20 +117,15 @@ select {
     justify-content: space-between;
     flex-direction: column;
 
-    color: #FFFFFF;
-    background-color: #000000;
-    background-image: url("../assets/img/bgimage.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0 0;
+    transition: all 0.3s ease;
 }
 
 .tip_text {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
 
     text-align: center;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
     text-shadow: 2px 2px #6c0101, 2px 2px #8e0000;
@@ -108,13 +138,12 @@ select {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    /* width: 610px; */
 }
 
 .ancient {
-    width: 230px;
-    height: 200px;
-    margin-bottom: 40px;
+    width: 200px;
+    height: 170px;
+    margin-bottom: 30px;
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -133,17 +162,11 @@ select {
 
 .ancient:hover {
     opacity: 1;
-    /* -webkit-filter: none;
-    -moz-filter: none;
-    -ms-filter: none;
-    -o-filter: none;
-    filter: none;
-    filter: none; */
 }
 
 .ancient_name {
     position: relative;
-    top: 200px;
+    top: 160px;
 
     font-size: 20px;
     text-shadow: 0 13.36px 8.896px #070000, 0 -2px 1px #850016;
@@ -153,30 +176,63 @@ select {
     color: #ff0000;
 }
 
-.difficulties {
+.wrapper {
     display: flex;
+
     justify-content: space-around;
 }
 
+.difficulty_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-left: 20px;
+    height: 320px;
+    width: 200px;
+}
+
+.difficulty_wrapper,
+.start_wrapper,
+.cards_wrapper,
+.crosscheckList_wrapper,
+.ancients_wrapper {
+    padding: 10px;
+    margin-bottom: 20px;
+
+    background-color: #00000033;
+    border-radius: 20px;
+
+    
+}
+
+.difficulties {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 300px;
+}
+
 .difficulty {
-    font-size: 25px;
+    font-size: 20px;
 
     cursor: pointer;
     opacity: 0.6;
-    color:#8e0000;
-
-    -webkit-filter: grayscale(80%);
-    -moz-filter: grayscale(80%);
-    -ms-filter: grayscale(80%);
-    -o-filter: grayscale(80%);
-    filter: grayscale(80%);
-    filter: gray;
+    color: #FFFFFF;
 }
 
 .difficulty:hover {
     opacity: 1;
 }
 
+.start_wrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: 200px;
+}
 
 .shadow {
     -webkit-filter: grayscale(100%);
@@ -196,63 +252,105 @@ select {
     -o-filter: none;
     filter: none;
     filter: none;
+
+    filter: drop-shadow(0 0 10px red);
 }
 
 .start_button {
+    width: 70px;
+    height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-image: url("../assets/img/favicon.png");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
     cursor: pointer;
-    opacity: 0.8;
+
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+
+    transition: all 0.3s ease;
 }
 
 .start_button:hover {
-    opacity: 1;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -ms-filter: none;
+    -o-filter: none;
+    filter: none;
+    filter: none;
+
+    transition: all 0.3s ease;
+}
+
+.start_button:active {
+    background-image: url("../assets/img/button_active.png");
+
+    -webkit-filter: none;
+    -moz-filter: none;
+    -ms-filter: none;
+    -o-filter: none;
+    filter: none;
+    filter: none;
+
+    transition: all 0.3s ease;
+}
+
+.message {
+    position: relative;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    color: #FFFFFF;
 }
 
 .cardsInDeck {
     display: flex;
-    flex-direction: column;
-    height: 200px;
-    width: 300px;
-    justify-content: space-between;
+    justify-content: center;
+
+    width: 1000px;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .stage {
     display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .blue_cards,
 .green_cards,
 .brown_cards {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     padding-left: 13px;
 
     font-size: 20px;
     color: #FFFFFF;
 
     border-radius: 15px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
-
-.blue_cards {
-    margin-left: 20px;
-    background-image: url("../assets/img/blue_bg.jpg");
-}
-
-.brown_cards {
-    margin-left: 10px;
-    background-image: url("../assets/img/brown_bg.jpg");
-}
-
-.green_cards {
-    margin-left: 10px;
-    background-image: url("../assets/img/green_bg.jpg");
-}
-
 
 .cards_show {
     display: flex;
-    justify-content: space-between;
-    width: 600px;
-    margin: 30px;
+    justify-content: center;
+
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -260,6 +358,7 @@ select {
 .card_image {
     width: 258px;
     height: 383px;
+    margin-right: 30px;
 
     /* background-image: url('../assets/img/mythicCardBackground.png'); */
     background-size: cover;
@@ -276,6 +375,39 @@ select {
 
 .cover_image:hover {
     opacity: 1;
+}
+
+.crosscheckList_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.check_button {
+    width: 200px;
+    height: 60px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    font-size: 20px;
+
+    border-radius: 10px;
+    border: transparent;
+    color: #FFFFFF;
+    background: linear-gradient(to right, #00217b, #00046c);
+
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.check_button:hover {
+    border-radius: 40px;
+
+    transition: all 0.3s ease-in;
+}
+
+.check_list {
+    font-size: 20px;
+    font-family: serif;
 }
 
 .hide {

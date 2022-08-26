@@ -11,47 +11,64 @@
 </head>
 
 <body>
+    <div class="additional_information hide"></div>
     <img class="big_card_image hide" src="#" alt="#">
     <main class="main">
-        <p class="tip_text">choose the ancient</p>
-        <ul class="ancients">
-        </ul>
-        <p class="tip_text">choose the difficulty</p>
-        <ul class="difficulties">
-            <li class="difficulty veryEase"></li>
-            <li class="difficulty easy"></li>
-            <li class="difficulty normal"></li>
-            <li class="difficulty hard"></li>
-            <li class="difficulty veryHard"></li>
-        </ul>
-        <p class="tip_text">face the ancient</p>
-        <ul>
-            <li class="start_button"></li>
-            <ul class="cardsInDeck">
-                <ul class="first_stage_indicators stage">
-                    <li>First stage</li>
-                    <li class="green_cards indicator"></li>
-                    <li class="brown_cards indicator"></li>
-                    <li class="blue_cards indicators"></li>
+        <div class="ancients_wrapper">
+            <p class="tip_text">choose the ancient</p>
+            <ul class="ancients">
+            </ul>
+        </div>
+        <div class="wrapper">
+            <div class="difficulty_wrapper">
+                <p class="tip_text">choose the difficulty</p>
+                <ul class="difficulties">
+                    <li class="difficulty veryEase" data-color="#22ff00"></li>
+                    <li class="difficulty easy" data-color="#22ff00"></li>
+                    <li class="difficulty normal" data-color="#FFFFFF"></li>
+                    <li class="difficulty hard" data-color="#ff0000"></li>
+                    <li class="difficulty veryHard" data-color="#ff0000"></li>
                 </ul>
-                <ul class="second_stage_indicators stage">
-                    <li>Second stage</li>
-                    <li class="green_cards indicator"></li>
-                    <li class="brown_cards indicator"></li>
-                    <li class="blue_cards indicator"></li>
+            </div>
+            <div class="start_wrapper">
+                <p class="tip_text">face the ancient</p>
+                <btn class="start_button"></btn>
+                <p class="message tip_text hide"></p>
+            </div>
+            <ul class="cards_wrapper">
+                <ul class="cardsInDeck hide">
+                    <ul class="first_stage_indicators stage">
+                        <li>First stage:</li>
+                        <li class="green_cards indicator"></li>
+                        <li class="brown_cards indicator"></li>
+                        <li class="blue_cards indicators"></li>
+                    </ul>
+                    <ul class="second_stage_indicators stage">
+                        <li>Second stage:</li>
+                        <li class="green_cards indicator"></li>
+                        <li class="brown_cards indicator"></li>
+                        <li class="blue_cards indicator"></li>
+                    </ul>
+                    <ul class="third_stage_indicators stage">
+                        <li>Third stage:</li>
+                        <li class="green_cards indicator"></li>
+                        <li class="brown_cards indicator"></li>
+                        <li class="blue_cards indicator"></li>
+                    </ul>
                 </ul>
-                <ul class="third_stage_indicators stage">
-                    <li>Third stage</li>
-                    <li class="green_cards indicator"></li>
-                    <li class="brown_cards indicator"></li>
-                    <li class="blue_cards indicator"></li>
+                <ul class="cards_show">
+                    <li class="cover_image"></li>
+                    <li class="card_image"></li>
+                    <li class="check">
+                    </li>
                 </ul>
             </ul>
-            <ul class="cards_show">
-                <li class="cover_image"></li>
-                <li class="card_image"></li>
-            </ul>
-        </ul>
+            <div class="crosscheckList_wrapper">
+                <button class="check_button">Для кроссчека</button>
+                <ul class="check_list hide">
+                </ul>
+            </div>
+        </div>
     </main>
     <script type="module" src="./src/index.js"></script>
 </body>
