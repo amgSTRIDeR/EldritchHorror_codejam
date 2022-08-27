@@ -2,7 +2,7 @@ import ancients from '../data/ancients.js';
 import mythicCards from '../data/mythicCards.js';
 import difficulties from '../data/difficulties.js';
 
-console.log('Good day Sir!');
+console.log('Good day!');
 console.log('1) При выполнении работы добавил древних и карты из дополнений к игре - теперь карт хватает на очень легкую и очень тяжелую сложность, но добор нормальных карт при нехватке в коде реализован.');
 console.log('2) При наведении на изображение древнего показывается подсказка с распределением карт по стадиям, для показа карты древнего необходимо нажать правую кнопку мыши на изображение древнего.');
 console.log('3) Если заинтересовала игра - помимо физической версии игры есть симулятор настольных игр "Tabletop Simulator" для которого можно найти "Древний ужас" со всеми дополнениями.');
@@ -23,16 +23,13 @@ const checkList = document.querySelector('.check_list');
 const checkButton = document.querySelector('.check_button');
 const additionalInformmation = document.querySelector('.additional_information');
 let tipInterval;
-
-
 let firstStage = [];
 let secondStage = [];
 let thirdStage = [];
 let activeAncient;
 let activeDifficulty;
-
-
 let ancientsHTML = '';
+
 ancients.forEach((e) => {
     ancientsHTML += `<li class="ancient ${e.id}" style="background-image: url(${e.icon})"><p class="ancient_name hide">${e.name}</p></li>`;
 })
@@ -59,45 +56,6 @@ function shuffleArray(array) {
     return shuffledArray;
 }
 
-difficultiesArray.forEach((e, i) => {
-    e.textContent = `${difficulties[i].name}`;
-})
-
-ancientsArray.forEach((e, i) => {
-    e.addEventListener('click', () => {
-        ancientsArray.forEach((e) => {
-            e.querySelector('p').classList.add('hide');
-        });
-        removeActiveClass(ancientsArray);
-        e.classList.add('active');
-        e.querySelector('p').classList.remove('hide');
-        activeAncient = ancients[i].id;
-    })
-
-    e.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-        bigCardImage.src = ancients.filter(v => v.name === e.textContent)[0].cardFace;
-        bigCardImage.classList.remove('hide');
-        main.classList.add('shadow');
-
-    }, false);
-
-    e.addEventListener('mouseenter', () => {
-        tipInterval = setTimeout(() => {
-            setDescription(i);
-            additionalInformmation.style.top = `${e.getBoundingClientRect().top + window.pageYOffset + 170}px`;
-            additionalInformmation.style.left = `${e.getBoundingClientRect().left + + window.pageXOffset}px`;
-            additionalInformmation.classList.remove('hide');
-        }, 1000);
-    });
-
-    e.addEventListener('mouseleave', () => {
-        additionalInformmation.classList.add('hide');
-        additionalInformmation.innerHTML = '';
-        clearInterval(tipInterval);
-    });
-})
-
 function setDescription(i) {
     let colorsArray = ['green', 'brown', 'blue'];
     let stagesArray = ['first', 'second', 'third'];
@@ -116,38 +74,7 @@ function setDescription(i) {
     })
 
     additionalInformmation.innerHTML = descriptionText;
-
 }
-
-cardImage.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    let cardImageLink = cardImage.style.backgroundImage.replace('url("', '');
-    cardImageLink = cardImageLink.replace('")', '');
-    bigCardImage.src = cardImageLink;
-    bigCardImage.classList.remove('hide');
-    main.classList.add('shadow');
-})
-
-window.addEventListener('click', () => {
-    if (main.classList.contains('shadow')) {
-        bigCardImage.classList.add('hide');
-        main.classList.remove('shadow');
-        bigCardImage.src = "";
-    }
-})
-
-difficultiesArray.forEach((e, i) => {
-    e.addEventListener('click', () => {
-        difficultiesArray.forEach((v) => {
-            v.style.color = '#FFFFFF';
-        });
-
-        removeActiveClass(difficultiesArray);
-        e.classList.add('active');
-        e.style.color = e.dataset.color;
-        activeDifficulty = difficulties[i].id
-    })
-})
 
 function getRandomNumber(max) {
     return Math.floor(Math.random() * max);
@@ -380,9 +307,7 @@ function getCards(ancient = 'azathoth', difficulty = 'normal') {
 
         fillCheckList();
     }
-
     showCardsInDeck();
-
 }
 
 function fillCheckList() {
@@ -406,22 +331,6 @@ function showCardsInDeck() {
     })
 
 }
-
-coverImage.addEventListener('click', () => {
-    if (firstStage.length) {
-        cardImage.style.backgroundImage = `url(${firstStage.shift().cardFace})`;
-    } else if (secondStage.length) {
-        cardImage.style.backgroundImage = `url(${secondStage.shift().cardFace})`;
-    } else if (thirdStage.length) {
-        cardImage.style.backgroundImage = `url(${thirdStage.shift().cardFace})`;
-        if (thirdStage.length === 0) {
-            coverImage.classList.add('hide');
-        }
-    }
-
-
-    showCardsInDeck();
-})
 
 function chooseTipAnimation(array, blinksNumber) {
     let count = 0;
@@ -448,8 +357,100 @@ function chooseTipAnimation(array, blinksNumber) {
         }
 
     }, 500)
-
 }
+
+difficultiesArray.forEach((e, i) => {
+    e.textContent = `${difficulties[i].name}`;
+})
+
+ancientsArray.forEach((e, i) => {
+    e.addEventListener('click', () => {
+        ancientsArray.forEach((e) => {
+            e.querySelector('p').classList.add('hide');
+        });
+        removeActiveClass(ancientsArray);
+        e.classList.add('active');
+        e.querySelector('p').classList.remove('hide');
+        activeAncient = ancients[i].id;
+    })
+
+    e.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        bigCardImage.src = ancients.filter(v => v.name === e.textContent)[0].cardFace;
+        bigCardImage.style.boxShadow = '0 0 30px 5px red';
+        bigCardImage.classList.remove('hide');
+        main.classList.add('shadow');
+
+    }, false);
+
+    e.addEventListener('mouseenter', () => {
+        tipInterval = setTimeout(() => {
+            setDescription(i);
+            additionalInformmation.style.top = `${e.getBoundingClientRect().top + window.pageYOffset + 170}px`;
+            additionalInformmation.style.left = `${e.getBoundingClientRect().left + + window.pageXOffset}px`;
+            additionalInformmation.classList.remove('hide');
+        }, 1000);
+    });
+
+    e.addEventListener('mouseleave', () => {
+        additionalInformmation.classList.add('hide');
+        additionalInformmation.innerHTML = '';
+        clearInterval(tipInterval);
+    });
+})
+
+cardImage.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    let cardImageLink = cardImage.style.backgroundImage.replace('url("', '');
+    cardImageLink = cardImageLink.replace('")', '');
+    bigCardImage.src = cardImageLink;
+    bigCardImage.style.boxShadow = cardImage.style.boxShadow;
+    bigCardImage.classList.remove('hide');
+    main.classList.add('shadow');
+})
+
+window.addEventListener('click', () => {
+    if (main.classList.contains('shadow')) {
+        bigCardImage.classList.add('hide');
+        main.classList.remove('shadow');
+        bigCardImage.src = "";
+    }
+})
+
+difficultiesArray.forEach((e, i) => {
+    e.addEventListener('click', () => {
+        difficultiesArray.forEach((v) => {
+            v.style.color = '#FFFFFF';
+        });
+
+        removeActiveClass(difficultiesArray);
+        e.classList.add('active');
+        e.style.color = e.dataset.color;
+        activeDifficulty = difficulties[i].id
+    })
+})
+
+coverImage.addEventListener('click', () => {
+    let cardFromDeck;
+    if (firstStage.length) {
+        cardFromDeck = firstStage.shift();
+        cardImage.style.backgroundImage = `url(${cardFromDeck.cardFace})`;
+        cardImage.style.boxShadow = `0 0 30px 5px ${cardFromDeck.color}`;
+    } else if (secondStage.length) {
+        cardFromDeck = secondStage.shift();
+        cardImage.style.backgroundImage = `url(${cardFromDeck.cardFace})`;
+        cardImage.style.boxShadow = `0 0 30px 5px ${cardFromDeck.color}`;
+    } else if (thirdStage.length) {
+        cardFromDeck = thirdStage.shift();
+        cardImage.style.backgroundImage = `url(${cardFromDeck.cardFace})`;
+        cardImage.style.boxShadow = `0 0 30px 5px ${cardFromDeck.color}`;
+        if (thirdStage.length === 0) {
+            coverImage.classList.add('hide');
+        }
+    }
+
+    showCardsInDeck();
+})
 
 startButton.addEventListener('click', () => {
     if (!activeAncient) {
@@ -465,6 +466,8 @@ startButton.addEventListener('click', () => {
         secondStage = [];
         thirdStage = [];
         checkList.innerHTML = '';
+        cardImage.style.boxShadow = ``;
+        coverImage.style.boxShadow = `0 0 30px 5px rgba(51, 0, 96, 0.25)`;
         coverImage.style.backgroundImage = "url('./assets/img/mythicCardBackground.jpg')"
         cardImage.style.backgroundImage = "url('')"
         coverImage.classList.remove('hide');
