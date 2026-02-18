@@ -1,116 +1,116 @@
-# Eldritch Horror - Помощник для настольной игры "Древний Ужас"
+# Eldritch Horror - Board Game Helper
 
-![Eldritch Horror](https://github.com/user-attachments/assets/222f5703-ef50-480e-b562-437428e1314d)
+![Eldritch Horror](./assets/screenshot.png)
 
-## 🎮 Демо
+## 🎮 Live Demo
 
-**[Открыть приложение](https://amgstrider.github.io/EldritchHorror_codejam/)**
+**[Open Application](https://amgstrider.github.io/EldritchHorror_codejam/)**
 
-## 📖 Описание
+## 📖 Description
 
-Веб-приложение для помощи в подготовке к настольной игре "Древний Ужас" (Eldritch Horror). Приложение автоматизирует один из самых сложных и времязатратных этапов подготовки к игре - составление колоды мифов согласно правилам игры.
+A web application designed to assist in preparing for the "Eldritch Horror" board game. The app automates one of the most complex and time-consuming stages of game preparation - building the Mythos deck according to the game rules.
 
-Это учебный проект, созданный в рамках задания CodeJam, демонстрирующий навыки работы с JavaScript, DOM-манипуляциями и реализацией сложных алгоритмов.
+This is an educational project created as part of a CodeJam assignment, demonstrating skills in JavaScript, DOM manipulation, and implementation of complex algorithms.
 
-## ✨ Возможности
+## ✨ Features
 
-- **Выбор Древнего**: 16 различных Древних с уникальными характеристиками и требованиями к колоде
-- **5 уровней сложности**:
-  - Очень легкий (Very Easy) - только карты со снежинками
-  - Легкий (Easy) - исключаются карты со щупальцами
-  - Нормальный (Normal) - все карты без исключений
-  - Тяжелый (Hard) - исключаются карты со снежинками
-  - Очень тяжелый (Very Hard) - только карты со щупальцами
-- **Автоматическое замешивание колоды** согласно правилам игры:
-  - Распределение карт по цветам (зеленые, синие, коричневые)
-  - Формирование колод для каждого из трех этапов игры
-  - Правильная последовательность карт
-- **Трекер состояния колоды**: отображение количества карт каждого цвета на каждом этапе
-- **Интерактивный просмотр карт**: просмотр карт мифов по клику
-- **Подсказки**: информация о распределении карт при наведении на Древнего
+- **Ancient Selection**: 16 different Ancients with unique characteristics and deck requirements
+- **5 Difficulty Levels**:
+  - Very Easy - only cards with snowflakes
+  - Easy - excludes cards with tentacles
+  - Normal - all cards without exceptions
+  - Hard - excludes cards with snowflakes
+  - Very Hard - only cards with tentacles
+- **Automatic Deck Shuffling** according to game rules:
+  - Distribution of cards by colors (green, blue, brown)
+  - Formation of decks for each of the three game stages
+  - Proper card sequencing
+- **Deck Status Tracker**: displays the number of cards of each color at each stage
+- **Interactive Card Viewing**: view Mythos cards by clicking
+- **Tooltips**: information about card distribution when hovering over an Ancient
 
-## 🛠️ Технологии
+## 🛠️ Technologies
 
-- **HTML5** - структура приложения
-- **CSS3** - стилизация и анимации
-- **JavaScript (ES6+)** - логика приложения
-- **Модульная архитектура** - разделение данных и логики
+- **HTML5** - application structure
+- **CSS3** - styling and animations
+- **JavaScript (ES6+)** - application logic
+- **Modular Architecture** - separation of data and logic
 
-## 📂 Структура проекта
+## 📂 Project Structure
 
 ```
-├── index.html          # Главная страница
+├── index.html          # Main page
 ├── css/
-│   └── style.css      # Стили приложения
+│   └── style.css      # Application styles
 ├── src/
-│   └── index.js       # Основная логика приложения
+│   └── index.js       # Main application logic
 ├── data/
-│   ├── ancients.js    # Данные о Древних
-│   ├── mythicCards.js # Данные о картах мифов
-│   └── difficulties.js # Настройки уровней сложности
+│   ├── ancients.js    # Ancient data
+│   ├── mythicCards.js # Mythos cards data
+│   └── difficulties.js # Difficulty settings
 └── assets/
-    ├── Ancients/      # Изображения Древних
-    ├── MythicCards/   # Изображения карт мифов
-    └── img/           # Прочие изображения
+    ├── Ancients/      # Ancient images
+    ├── MythicCards/   # Mythos card images
+    └── img/           # Other images
 ```
 
-## 🚀 Как использовать
+## 🚀 How to Use
 
-1. **Выберите Древнего** - кликните на одно из изображений Древних в верхней части экрана
-2. **Выберите уровень сложности** - выберите один из пяти уровней сложности
-3. **Нажмите кнопку "Face the Ancient"** - начните игру и получите замешанную колоду
-4. **Просматривайте карты** - кликайте на карты для их просмотра
-5. **Отслеживайте прогресс** - используйте трекер для контроля состояния колоды
+1. **Choose an Ancient** - click on one of the Ancient images at the top of the screen
+2. **Select difficulty level** - choose one of five difficulty levels
+3. **Click "Face the Ancient" button** - start the game and get a shuffled deck
+4. **View cards** - click on cards to view them
+5. **Track progress** - use the tracker to monitor deck status
 
-## 💡 Особенности реализации
+## 💡 Implementation Features
 
-### Алгоритм замешивания колоды
+### Deck Shuffling Algorithm
 
-1. Определение необходимого количества карт каждого цвета на основе характеристик выбранного Древнего
-2. Фильтрация карт согласно выбранному уровню сложности
-3. Случайное перемешивание отобранных карт по цветам
-4. Формирование колод для каждого из трех этапов игры
-5. Объединение этапов в единую колоду в правильной последовательности
+1. Determining the required number of cards of each color based on the selected Ancient's characteristics
+2. Filtering cards according to the selected difficulty level
+3. Random shuffling of selected cards by color
+4. Formation of decks for each of the three game stages
+5. Combining stages into a single deck in the correct sequence
 
-### Дополнительные возможности
+### Additional Features
 
-- Включены Древние и карты из дополнений к игре
-- При наведении на Древнего показывается подсказка с распределением карт по стадиям
-- Для просмотра карты Древнего или карты мифа - нажмите правую кнопку мыши на изображении
-- Реализован добор нормальных карт при нехватке карт нужной сложности
+- Includes Ancients and cards from game expansions
+- Hovering over an Ancient shows a tooltip with card distribution by stages
+- Right-click on an Ancient or Mythos card image to view it
+- Implemented fallback to normal difficulty cards when specific difficulty cards are insufficient
 
-## 🎯 Локальная установка
+## 🎯 Local Installation
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 ```bash
 git clone https://github.com/amgSTRIDeR/EldritchHorror_codejam.git
 ```
 
-2. Откройте `index.html` в браузере или запустите локальный сервер:
+2. Open `index.html` in a browser or start a local server:
 ```bash
-# С помощью Python
+# Using Python
 python -m http.server 8080
 
-# С помощью Node.js
+# Using Node.js
 npx http-server
 ```
 
-3. Откройте в браузере `http://localhost:8080`
+3. Open `http://localhost:8080` in your browser
 
-## 📝 О настольной игре
+## 📝 About the Board Game
 
-"Древний Ужас" (Eldritch Horror) - кооперативная настольная игра в жанре хоррор, созданная по мотивам произведений Говарда Лавкрафта. Игроки путешествуют по миру, исследуют загадки и сражаются с чудовищами, чтобы предотвратить пробуждение Древнего.
+"Eldritch Horror" is a cooperative horror board game based on the works of H.P. Lovecraft. Players travel the world, investigate mysteries, and battle monsters to prevent the awakening of an Ancient One.
 
-**Интересный факт**: Помимо физической версии игры существует симулятор настольных игр "Tabletop Simulator", в мастерской Steam которого можно найти "Древний ужас" со всеми дополнениями.
+**Fun Fact**: In addition to the physical version of the game, there is a tabletop game simulator "Tabletop Simulator" available on Steam Workshop that includes "Eldritch Horror" with all expansions.
 
-## 👨‍💻 Автор
+## 👨‍💻 Author
 
-Проект создан в рамках учебного задания CodeJam
+Project created as part of CodeJam educational assignment
 
-## 📄 Лицензия
+## 📄 License
 
-Данный проект создан в образовательных целях.
+This project is created for educational purposes.
 
 ---
 
-⭐ Если вам понравился проект, поставьте звездочку на GitHub!
+⭐ If you enjoyed this project, give it a star on GitHub!
