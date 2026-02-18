@@ -1,6 +1,6 @@
 # Eldritch Horror - Board Game Helper
 
-![Eldritch Horror](./assets/screenshot.png)
+![Eldritch Horror](https://github.com/user-attachments/assets/9dbae411-5b10-4ed4-a445-76b2c586eb5f)
 
 ## 🎮 Live Demo
 
